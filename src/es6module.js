@@ -1,5 +1,5 @@
-function sayHello(who) {
-  return `Hello ${who}!`
+function sayHello() {
+  return 'Hello World!'
 
 }
 
