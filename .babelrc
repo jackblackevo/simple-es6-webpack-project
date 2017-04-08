@@ -1,0 +1,11 @@
+{
+  "presets": [
+    [
+      "es2015",
+      {
+        // 不將 ES2015 模組轉譯成 CommonJS 模組
+        "modules": false
+      }
+    ]
+  ]
+}
