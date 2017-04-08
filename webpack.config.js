@@ -42,10 +42,6 @@ module.exports = {
           {
             // Loader 名稱在 Webpack 2 不可省略 '-loader' 後綴
             loader: 'babel-loader'
-          },
-          {
-            // 使用套件來自動加入 Hot Module Replacement 的 API 呼叫
-            loader: 'webpack-module-hot-accept'
           }
         ]
       }

@@ -4,3 +4,7 @@ window.addEventListener('DOMContentLoaded', () => {
   document.getElementById('showText').innerText = sayHello('World')
 
 })
+
+if (module.hot) {
+  module.hot.accept()
+}
