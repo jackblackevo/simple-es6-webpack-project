@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --progress",
-    "build": "webpack --progress"
+    "build": "NODE_ENV=production webpack --progress"
   },
   "author": "Tse-Hsien Chiang",
   "license": "ISC",

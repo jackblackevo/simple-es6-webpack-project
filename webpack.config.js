@@ -3,8 +3,8 @@ const path = require('path')
 // 載入 webpack 模組
 const webpack = require('webpack')
 
-// 將全部設定輸出為模組，供 Webpack 2 使用
-module.exports = {
+// Webpack 2 設定值
+const webpackConfig = {
   // 執行環境，即 webpack 指令要作用的工作目錄（本機路徑）
   // __dirname 為此 Webpack 2 設定檔模組的所在目錄
   context: path.join(__dirname, 'src'),
@@ -46,11 +46,24 @@ module.exports = {
         ]
       }
     ]
-  },
+  }
+}
+
+if (process.env.NODE_ENV === 'production') {
+  // 若要編譯成正式產品，使用以下設定值：
+  // 插件
+  webpackConfig.plugins = [
+    // 最小化 JavaScript 檔案
+    new webpack.optimize.UglifyJsPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin()
+  ]
+
+} else {
+  // 開發階段執行，則使用以下設定值：
   // 產生原始碼映射表（Source Map），方便開發時除錯
-  devtool: 'cheap-module-eval-source-map',
-  // Webpack Dev Server 設定
-  devServer: {
+  webpackConfig.devtool = 'cheap-module-eval-source-map'
+  // Webpack Dev Server（WDS）設定
+  webpackConfig.devServer = {
     // 伺服器根目錄位置（本機路徑，基於 context）
     contentBase: 'dist',
     // 開啟 inline mode（檔案有更新時自重整頁面）
@@ -68,12 +81,16 @@ module.exports = {
     stats: {
       colors: true
     }
-  },
+  }
   // 插件
-  plugins: [
+  webpackConfig.plugins = [
     // Hot Module Replacement（HMR）
     new webpack.HotModuleReplacementPlugin(),
     // Hot-Reload 時在瀏覽器 Console 顯示更新的檔案名稱
     new webpack.NamedModulesPlugin()
   ]
+
 }
+
+// 將全部設定輸出為 Node.js 模組，供 Webpack 2 使用
+module.exports = webpackConfig
