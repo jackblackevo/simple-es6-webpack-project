@@ -50,9 +50,9 @@ const webpackConfig = {
         // Loader 可以載入指定的資源，並進行輸出轉換
         // Webpack 本身只支援 JavaScript 模組
         // 是藉由 Loader 來支源其它不同類型的資源
-        // Loader 最後會將資源輸出為字串，Webapck 再包裝成 JavaScript 模組
         // 作用的順序是由陣列中最末項的 Loader 開始，再依序往前
         // 將轉換過的結果交由前一項索引的 Loader 繼續處理
+        // Loader 最後會將資源輸出為字串，Webapck 再包裝成 JavaScript 模組
         use: [
           {
             // Loader 名稱在 Webpack 2 不可省略 '-loader' 後綴
