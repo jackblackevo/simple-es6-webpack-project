@@ -6,14 +6,15 @@ const webpack = require('webpack')
 // Webpack 2 設定值
 // 定義開發與正式共用的設定值
 const webpackConfig = {
-  // 執行環境，即 webpack 指令要作用的工作目錄（本機路徑）
+  // 專案根目錄路徑（本機路徑，須為絕對路徑）
+  // 預設值為 webpack 指令作用的工作目錄（current working directory, CWD）
   // __dirname 為此 Webpack 2 設定檔模組的所在目錄
   context: path.join(__dirname, 'src'),
   // Entry（進入點）檔案路徑（基於 context）
-  // Entry 即專案中引入依賴其他模組的檔案
-  entry: [
-    './index.js'
-  ],
+  // 專案應用程式會由 Entry 啟動，並引入依賴模組
+  entry: {
+    index: './index.js'
+  },
   // 輸出設定
   output: {
     // 輸出檔的目標位置（本機路徑，須為絕對路徑）
@@ -21,24 +22,37 @@ const webpackConfig = {
     // 輸出檔名
     filename: 'bundle.js',
     // 輸出檔於伺服器公開位置中的絕對路徑
-    // 在 Webpack Dev Server 運作時
-    // 並不會真的產出轉換後的檔案，而是存放在記憶體中
-    // 記憶體中的檔案，路徑會對應 publicPath 所設定的位置
     // 開啟 Hot-Reload 時，此選項為必要設定
     // 因 Hot Module Replacement 須由此位置檢查更新的檔案
     publicPath: '/js/'
   },
-  // Loaders（轉換器）設定
-  // Loader 可以載入指定的資源，並進行輸出轉換
+  // 模組設定
+  // Webpack 將專案中所有的資源（asset）檔案皆視為模組
+  // 在此設定如何處理專案中各種不同類型的資源模組（即檔案）
   module: {
-    // Loaders 規則
+    // 模組處理規則
     rules: [
       {
-        // 表示作用在 *.js 檔案（正則表示法）
-        test: /\.js$/,
-        // 排除作用於 node_modules 目錄（正則表示法）
-        exclude: /node_modules/,
-        // 應用此規則的 Loaders
+        // 資源檔案篩選條件
+        resource: {
+          // 須符合正則表示法條件
+          test: [
+            // 表示作用在所有 *.js 檔案
+            /\.js$/
+          ],
+          // 須排除路徑條件（本機路徑，須為絕對路徑）
+          exclude: [
+            // 表示排除專案中的 node_modules 目錄
+            path.join(__dirname, 'node_modules')
+          ]
+        },
+        // 應用於此處理規則的 Loaders（轉換器）
+        // Loader 可以載入指定的資源，並進行輸出轉換
+        // Webpack 本身只支援 JavaScript 模組
+        // 是藉由 Loader 來支源其它不同類型的資源
+        // Loader 最後會將資源輸出為字串，Webapck 再包裝成 JavaScript 模組
+        // 作用的順序是由陣列中最末項的 Loader 開始，再依序往前
+        // 將轉換過的結果交由前一項索引的 Loader 繼續處理
         use: [
           {
             // Loader 名稱在 Webpack 2 不可省略 '-loader' 後綴
@@ -76,8 +90,8 @@ if (process.env.NODE_ENV === 'production') {
   webpackConfig.devtool = 'cheap-module-eval-source-map'
   // Webpack Dev Server（WDS）設定
   webpackConfig.devServer = {
-    // 伺服器根目錄位置（本機路徑，基於 context）
-    contentBase: 'dist',
+    // 伺服器根目錄位置（本機路徑，建議使用絕對路徑）
+    contentBase: path.join(__dirname, 'dist'),
     // 開啟 inline mode（檔案有更新時自重整頁面）
     inline: true,
     // 開啟 Hot-Reload
@@ -87,6 +101,9 @@ if (process.env.NODE_ENV === 'production') {
     // 自動開啟瀏覽器
     open: true,
     port: 9000,
+    // 因 Webpack Dev Server 運作時
+    // 並不會真的產出轉換後的檔案，而是存放在記憶體中
+    // 記憶體中的檔案，路徑會對應 devServer.publicPath 所設定的位置
     // 建議與 output.publicPath 一致
     // 若開啟 Hot-Reload，則必須與 output.publicPath 一致
     publicPath: '/js/',
