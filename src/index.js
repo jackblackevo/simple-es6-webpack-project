@@ -7,6 +7,11 @@ window.addEventListener('DOMContentLoaded', () => {
 
   })
 
+  if (process.env.NODE_ENV !== 'production') {
+    document.getElementById('environment').innerText = '開發模式'
+
+  }
+
 })
 
 if (module.hot) {
