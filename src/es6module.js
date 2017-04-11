@@ -1,6 +1,5 @@
-function sayHello() {
+function sayHello () {
   return 'Hello World!'
-
 }
 
 export default sayHello

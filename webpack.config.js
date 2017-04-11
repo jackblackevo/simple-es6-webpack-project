@@ -83,7 +83,6 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.optimize.UglifyJsPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin()
   )
-
 } else {
   // 開發階段執行，則使用以下設定值：
   // 產生原始碼映射表（Source Map），方便開發時除錯
@@ -118,7 +117,6 @@ if (process.env.NODE_ENV === 'production') {
     // Hot-Reload 時在瀏覽器 Console 顯示更新的檔案名稱
     new webpack.NamedModulesPlugin()
   )
-
 }
 
 // 將全部設定輸出為 Node.js 模組，供 Webpack 2 使用
