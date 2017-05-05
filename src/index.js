@@ -1,6 +1,6 @@
 import sayHello from './es6module'
 
-window.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('updateTextBtn').addEventListener('click', event => {
     document.getElementById('showText').innerText = sayHello()
     event.target.disabled = true
