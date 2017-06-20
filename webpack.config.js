@@ -91,7 +91,7 @@ if (process.env.NODE_ENV === 'production') {
   webpackConfig.devServer = {
     // 伺服器根目錄位置（本機路徑，建議使用絕對路徑）
     contentBase: path.join(__dirname, 'dist'),
-    // 開啟 inline mode（檔案有更新時自重整頁面）
+    // 開啟 inline mode（檔案有更新時自動重整頁面）
     // 使用 Hot Module Replacement 時建議開啟此模式
     inline: true,
     // 開啟 Hot-Reload
