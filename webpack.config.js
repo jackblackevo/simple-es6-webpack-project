@@ -3,12 +3,12 @@ const path = require('path')
 // 載入 webpack 模組
 const webpack = require('webpack')
 
-// Webpack 2 設定值
+// Webpack 設定值
 // 定義開發與正式共用的設定值
 const webpackConfig = {
   // 專案根目錄路徑（本機路徑，須為絕對路徑）
   // 預設值為 webpack 指令作用的工作目錄（current working directory, CWD）
-  // __dirname 為此 Webpack 2 設定檔模組的所在目錄
+  // __dirname 為此 Webpack 設定檔模組的所在目錄
   context: path.join(__dirname, 'src'),
   // Entry（進入點）檔案路徑（基於 context）
   // 專案應用程式會由 Entry 啟動，並引入依賴模組
@@ -55,7 +55,7 @@ const webpackConfig = {
         // Loader 最後會將資源輸出為字串，Webapck 再包裝成 JavaScript 模組
         use: [
           {
-            // Loader 名稱在 Webpack 2 不可省略 '-loader' 後綴
+            // Loader 名稱在 Webpack 2 之後不可省略 '-loader' 後綴
             loader: 'babel-loader'
           }
         ]
@@ -119,5 +119,5 @@ if (process.env.NODE_ENV === 'production') {
   )
 }
 
-// 將全部設定輸出為 Node.js 模組，供 Webpack 2 使用
+// 將全部設定輸出為 Node.js 模組，供 Webpack 使用
 module.exports = webpackConfig
