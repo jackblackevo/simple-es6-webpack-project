@@ -76,7 +76,7 @@ const webpackConfig = {
     }),
     // 動態產生 HTML 並自動引入輸出後的 Entry 檔案
     new htmlWebpackPlugin({
-      // 依據的模板
+      // 依據的模板檔案路徑（基於 context）
       template: './index.html',
       // 要引入的 Entry 名稱
       chunks: ['index']
