@@ -78,7 +78,7 @@ const webpackConfig = {
     new htmlWebpackPlugin({
       // 依據的模板
       template: './index.html',
-      // 要引入的 Entry 檔案名稱
+      // 要引入的 Entry 名稱
       chunks: ['index']
     })
   ]
