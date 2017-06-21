@@ -81,7 +81,10 @@ if (process.env.NODE_ENV === 'production') {
   webpackConfig.plugins.push(
     // 最小化 JavaScript 檔案
     new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin()
+    // 透過計算引入模組及 chunk（程式碼塊，被 Webpack 重新組合而成的一段一段程式碼）的次數
+    // 進而減少整體輸出檔案的大小
+    // 自 Webpack 2 開始，預設為開啟
+    // new webpack.optimize.OccurrenceOrderPlugin()
   )
 } else {
   // 開發階段執行，則使用以下設定值：
