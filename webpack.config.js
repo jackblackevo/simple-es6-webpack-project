@@ -2,6 +2,8 @@
 const path = require('path')
 // 載入 webpack 模組
 const webpack = require('webpack')
+// 載入 HtmlWebpackPlugin 插件
+const htmlWebpackPlugin = require('html-webpack-plugin')
 
 // Webpack 設定值
 // 定義開發與正式共用的設定值
@@ -13,18 +15,18 @@ const webpackConfig = {
   // Entry（進入點）檔案路徑（基於 context）
   // 專案應用程式會由 Entry 啟動，並引入依賴模組
   entry: {
-    index: './index.js'
+    index: './js/index.js'
   },
   // 輸出設定
   output: {
     // 輸出檔的目標位置（本機路徑，須為絕對路徑）
-    path: path.join(__dirname, 'dist', 'js'),
-    // 輸出檔名
-    filename: 'bundle.js',
+    path: path.join(__dirname, 'dist'),
+    // 輸出檔名（可包含路徑）
+    filename: 'js/bundle.js',
     // 輸出檔於伺服器公開位置中的絕對路徑
     // 開啟 Hot-Reload 時，此選項為必要設定
     // 因 Hot Module Replacement 須由此位置檢查更新的檔案
-    publicPath: '/js/'
+    publicPath: '/'
   },
   // 模組設定
   // Webpack 將專案中所有的資源（asset）檔案皆視為模組
@@ -71,6 +73,13 @@ const webpackConfig = {
       // 實際上 DefinePlugin 是以直接替換文字的方式運作
       // 所以賦值的時候，值若是字串則寫法必須特別處理
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
+    }),
+    // 動態產生 HTML 並自動引入輸出後的 Entry 檔案
+    new htmlWebpackPlugin({
+      // 依據的模板
+      template: './index.html',
+      // 要引入的 Entry 檔案名稱
+      chunks: ['index']
     })
   ]
 }
@@ -109,7 +118,7 @@ if (process.env.NODE_ENV === 'production') {
     // 記憶體中的檔案，路徑會對應 devServer.publicPath 所設定的位置
     // 建議與 output.publicPath 一致
     // 若開啟 Hot-Reload，則必須與 output.publicPath 一致
-    publicPath: '/js/',
+    publicPath: '/',
     stats: {
       colors: true
     }
