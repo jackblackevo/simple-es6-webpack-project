@@ -3,7 +3,7 @@ const path = require('path')
 // 載入 webpack 模組
 const webpack = require('webpack')
 // 載入 HtmlWebpackPlugin 插件
-const htmlWebpackPlugin = require('html-webpack-plugin')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // Webpack 設定值
 // 定義開發與正式共用的設定值
@@ -75,7 +75,7 @@ const webpackConfig = {
       'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV)
     }),
     // 動態產生 HTML 並自動引入輸出後的 Entry 檔案
-    new htmlWebpackPlugin({
+    new HtmlWebpackPlugin({
       // 依據的模板檔案路徑（基於 context）
       template: './index.html',
       // 要引入的 Entry 名稱
