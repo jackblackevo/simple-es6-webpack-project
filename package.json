@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --progress",
-    "build": "cross-env NODE_ENV=production webpack --progress"
+    "dev": "webpack-dev-server --progress --mode development",
+    "build": "webpack --progress --mode production"
   },
   "author": "Tse-Hsien Chiang",
   "license": "ISC",
@@ -14,8 +14,8 @@
     "babel-core": "^6.26.3",
     "babel-loader": "^7.1.5",
     "babel-preset-es2015": "^6.24.1",
-    "cross-env": "^5.2.0",
     "html-webpack-plugin": "^3.2.0",
+    "uglifyjs-webpack-plugin": "^1.2.7",
     "webpack": "^4.16.1",
     "webpack-cli": "^3.1.0",
     "webpack-dev-server": "^3.1.4"
