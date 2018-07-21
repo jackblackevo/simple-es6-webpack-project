@@ -5,12 +5,12 @@ const webpack = require('webpack')
 // 載入 HtmlWebpackPlugin 插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-// Webpack 設定值
+// webpack 設定值
 // 定義開發與正式共用的設定值
 const webpackConfig = {
   // 專案根目錄路徑（本機路徑，須為絕對路徑）
   // 預設值為 webpack 指令作用的工作目錄（current working directory, CWD）
-  // __dirname 為此 Webpack 設定檔模組的所在目錄
+  // __dirname 為此 webpack 設定檔模組的所在目錄
   context: path.join(__dirname, 'src'),
   // Entry（進入點）檔案路徑（基於 context）
   // 專案應用程式會由 Entry 啟動，並引入依賴模組
@@ -29,7 +29,7 @@ const webpackConfig = {
     publicPath: '/'
   },
   // 模組設定
-  // Webpack 將專案中所有的資源（asset）檔案皆視為模組
+  // webpack 將專案中所有的資源（asset）檔案皆視為模組
   // 在此設定如何處理專案中各種不同類型的資源模組（即檔案）
   module: {
     // 模組處理規則
@@ -50,14 +50,14 @@ const webpackConfig = {
         },
         // 應用於此處理規則的 Loaders（轉換器）
         // Loader 可以載入指定的資源，並進行輸出轉換
-        // Webpack 本身只支援 JavaScript 模組
+        // webpack 本身只支援 JavaScript 模組
         // 是藉由 Loader 來支源其它不同類型的資源
         // 作用的順序是由陣列中最末項的 Loader 開始，再依序往前
         // 將轉換過的結果交由前一項索引的 Loader 繼續處理
-        // Loader 最後會將資源輸出為字串，Webpack 再包裝成 JavaScript 模組
+        // Loader 最後會將資源輸出為字串，webpack 再包裝成 JavaScript 模組
         use: [
           {
-            // Loader 名稱在 Webpack 2 之後不可省略 '-loader' 後綴
+            // Loader 名稱在 webpack 2 之後不可省略 '-loader' 後綴
             loader: 'babel-loader'
           }
         ]
@@ -90,16 +90,16 @@ if (process.env.NODE_ENV === 'production') {
   webpackConfig.plugins.push(
     // 最小化 JavaScript 檔案
     new webpack.optimize.UglifyJsPlugin(),
-    // 透過計算引入模組及 chunk（程式碼塊，被 Webpack 重新組合而成的一段一段程式碼）的次數
+    // 透過計算引入模組及 chunk（程式碼塊，被 webpack 重新組合而成的一段一段程式碼）的次數
     // 進而減少整體輸出檔案的大小
-    // 自 Webpack 2 開始，預設為開啟
+    // 自 webpack 2 開始，預設為開啟
     // new webpack.optimize.OccurrenceOrderPlugin()
   )
 } else {
   // 開發階段執行，則使用以下設定值：
   // 產生原始碼映射表（Source Map），方便開發時除錯
   webpackConfig.devtool = 'cheap-module-eval-source-map'
-  // Webpack Dev Server（WDS）設定
+  // webpack DevServer（WDS）設定
   webpackConfig.devServer = {
     // 伺服器根目錄位置（本機路徑，建議使用絕對路徑）
     contentBase: path.join(__dirname, 'dist'),
@@ -113,7 +113,7 @@ if (process.env.NODE_ENV === 'production') {
     // 自動開啟瀏覽器
     open: true,
     port: 9000,
-    // 因 Webpack Dev Server 運作時
+    // 因 webpack DevServer 運作時
     // 並不會真的產出轉換後的檔案，而是存放在記憶體中
     // 記憶體中的檔案，路徑會對應 devServer.publicPath 所設定的位置
     // 建議與 output.publicPath 一致
@@ -132,5 +132,5 @@ if (process.env.NODE_ENV === 'production') {
   )
 }
 
-// 將全部設定輸出為 Node.js 模組，供 Webpack 使用
+// 將全部設定輸出為 Node.js 模組，供 webpack 使用
 module.exports = webpackConfig
