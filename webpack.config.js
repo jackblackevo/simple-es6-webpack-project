@@ -4,8 +4,6 @@ const path = require('path')
 const webpack = require('webpack')
 // 載入 HtmlWebpackPlugin 插件
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-// 載入 UglifyJsPlugin 插件
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const getWebpackConfig = (env, argv) => {
   // webpack 設定值
@@ -69,15 +67,6 @@ const getWebpackConfig = (env, argv) => {
     },
     // 插件
     plugins: [
-      // 宣告一個全域的常數並賦值，讓進入點及其相依的模組使用
-      new webpack.DefinePlugin({
-        // 將 Node.js 環境的 process.env.NODE_ENV 宣告為全域常數
-        // 讓瀏覽器環境也可以取用 process.env.NODE_ENV
-        // webpack 4 開始由於新增了 mode 參數，則可以使用 argv.mode
-        // 實際上 DefinePlugin 是以直接替換文字的方式運作
-        // 所以賦值的時候，值若是字串則寫法必須特別處理
-        'process.env.NODE_ENV': JSON.stringify(argv.mode)
-      }),
       // 動態產生 HTML 並自動引入輸出後的 Entry 檔案
       new HtmlWebpackPlugin({
         // 依據的模板檔案路徑（基於 context）
@@ -90,15 +79,16 @@ const getWebpackConfig = (env, argv) => {
 
   if (argv.mode === 'production') {
     // 若要編譯成正式產品，使用以下設定值：
-    // 加入插件
-    webpackConfig.plugins.push(
+    // 加入 optimization 設定
+    webpackConfig.optimization = {
       // 最小化 JavaScript 檔案
-      new UglifyJsPlugin(),
+      // 於 production mode 時預設為開啟
+      // minimize: true,
       // 透過計算引入模組及 chunk（程式碼塊，被 webpack 重新組合而成的一段一段程式碼）的次數
       // 進而減少整體輸出檔案的大小
       // 自 webpack 2 開始，預設為開啟
-      // new webpack.optimize.OccurrenceOrderPlugin()
-    )
+      // occurrenceOrder: true
+    }
   } else {
     // 開發階段執行，則使用以下設定值：
     // 產生原始碼映射表（Source Map），方便開發時除錯
@@ -131,9 +121,19 @@ const getWebpackConfig = (env, argv) => {
     webpackConfig.plugins.push(
       // Hot Module Replacement（HMR）
       new webpack.HotModuleReplacementPlugin(),
-      // Hot-Reload 時在瀏覽器 Console 顯示更新的檔案名稱
-      new webpack.NamedModulesPlugin()
     )
+    // 加入 optimization 設定
+    webpackConfig.optimization = {
+      // 宣告一個全域的常數並賦值，讓進入點及其相依的模組使用
+      // 將 Node.js 環境的 process.env.NODE_ENV 宣告為全域常數
+      // 讓瀏覽器環境也可以取用 process.env.NODE_ENV
+      // webpack 4 以新增的 mode 參數值為預設值
+      // （實際上是使用 DefinePlugin）
+      // nodeEnv: argv.mode,
+      // Hot-Reload 時在瀏覽器 Console 顯示更新的檔案名稱
+      // 於 development mode 時預設為開啟
+      // namedModules: true
+    }
   }
 
   return webpackConfig
