@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "webpack-dev-server --progress --mode development",
-    "build": "webpack --progress --mode production"
+    "dev": "webpack-dev-server --progress --config webpack.dev.js",
+    "build": "webpack --progress --config webpack.prod.js"
   },
   "author": "Tse-Hsien Chiang",
   "license": "ISC",
