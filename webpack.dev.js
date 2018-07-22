@@ -26,10 +26,10 @@ const webpackDevConfig = {
     open: true,
     port: 9000,
     // 因 webpack DevServer 運作時
-    // 並不會真的產出轉換後的檔案，而是存放在記憶體中
-    // 記憶體中的檔案，路徑會對應 devServer.publicPath 所設定的位置
+    // 並不會真的產出轉換後的資源檔案，而是存放在記憶體中
+    // 記憶體中的檔案，其在 DevServer 上的服務位置即在 devServer.publicPath 所設定的路徑之下
     // 建議與 output.publicPath 一致
-    // 若開啟 Hot-Reload，則必須與 output.publicPath 一致
+    // 若開啟 Hot-Reload，則必須與 output.publicPath 一致，才能取得更新的內容
     publicPath: '/',
     stats: {
       colors: true

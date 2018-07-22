@@ -21,9 +21,9 @@ const webpackCommonConfig = {
     path: path.join(__dirname, 'dist'),
     // 輸出檔名（可包含路徑）
     filename: 'js/bundle.js',
-    // 輸出檔於伺服器公開位置中的絕對路徑
+    // 預定所有資源檔案會置於伺服器中（通常為 CDN）的基礎路徑，即為引用靜態資源時的根路徑
     // 開啟 Hot-Reload 時，此選項為必要設定
-    // 因 Hot Module Replacement 須由此位置檢查更新的檔案
+    // 因 Hot Module Replacement 須由此基礎路徑下取得更新的資源
     publicPath: '/'
   },
   // 模組設定
