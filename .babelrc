@@ -1,7 +1,7 @@
 {
   "presets": [
     [
-      "env",
+      "@babel/preset-env",
       {
         // 不將 ES2015 模組轉譯成 CommonJS 模組
         // （Webpack 2 已支援 ES6 模組）
