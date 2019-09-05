@@ -3,10 +3,6 @@
   "version": "1.0.0",
   "description": "Vanilla JS Webpack Project",
   "main": "index.js",
-  "engines": {
-    "node": ">= 10.16.3",
-    "npm": ">= 6.9.0"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "webpack-dev-server --progress --config webpack.dev.js",
