@@ -38,7 +38,7 @@ const webpackCommonConfig = {
           // 須符合正則表示法條件
           test: [
             // 表示作用在所有 *.js 檔案
-            /\.js$/
+            /\.jsx?$/
           ],
           // 須排除路徑條件（本機路徑，須為絕對路徑）
           exclude: [
