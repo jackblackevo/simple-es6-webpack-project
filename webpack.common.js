@@ -13,7 +13,7 @@ const webpackCommonConfig = {
   // Entry（進入點）檔案路徑（基於 context）
   // 專案應用程式會由 Entry 啟動，並引入依賴模組
   entry: {
-    index: './js/index.js'
+    index: ['./js/index.js']
   },
   // 輸出設定
   output: {

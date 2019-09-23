@@ -9,6 +9,9 @@ const webpackCommonConfig = require('./webpack.common.js')
 const webpackDevConfig = {
   // 開發階段執行，則使用以下設定值：
   mode: 'development',
+  entry: {
+    index: ['react-hot-loader/patch']
+  },
   // 產生原始碼映射表（Source Map），方便開發時除錯
   devtool: 'cheap-module-eval-source-map',
   // webpack DevServer（WDS）設定
@@ -38,7 +41,7 @@ const webpackDevConfig = {
   // 加入插件
   plugins: [
     // Hot Module Replacement（HMR）
-    new webpack.HotModuleReplacementPlugin()
+    // new webpack.HotModuleReplacementPlugin()
   ],
   // 加入 optimization 設定
   optimization: {
@@ -54,4 +57,4 @@ const webpackDevConfig = {
   }
 }
 
-module.exports = merge(webpackCommonConfig, webpackDevConfig)
+module.exports = merge.strategy({ entry: 'prepend' })(webpackCommonConfig, webpackDevConfig)
