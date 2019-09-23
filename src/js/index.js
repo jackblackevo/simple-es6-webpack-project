@@ -1,20 +1,6 @@
-import sayHello from './es6module'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import SayHello from './SayHello'
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.getElementById('updateTextBtn').addEventListener('click', event => {
-    document.getElementById('showText').innerText = sayHello()
-    event.target.disabled = true
-  })
-
-  if (process.env.NODE_ENV !== 'production') {
-    document.getElementById('environment').innerText = '開發模式'
-  }
-})
-
-if (module.hot) {
-  module.hot.accept('./es6module', () => {
-    const updateTextBtn = document.getElementById('updateTextBtn')
-    updateTextBtn.innerText = 'Update Text'
-    updateTextBtn.disabled = false
-  })
-}
+const rootElement = document.getElementById('root')
+ReactDOM.render(<SayHello />, rootElement)
