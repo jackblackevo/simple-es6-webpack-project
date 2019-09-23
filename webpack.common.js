@@ -13,7 +13,7 @@ const webpackCommonConfig = {
   // Entry（進入點）檔案路徑（基於 context）
   // 專案應用程式會由 Entry 啟動，並引入依賴模組
   entry: {
-    index: ['./js/index.js']
+    index: ['./js/index.tsx']
   },
   // 輸出設定
   output: {
@@ -38,7 +38,7 @@ const webpackCommonConfig = {
           // 須符合正則表示法條件
           test: [
             // 表示作用在所有 *.js 檔案
-            /\.jsx?$/
+            /\.[jt]sx?$/
           ],
           // 須排除路徑條件（本機路徑，須為絕對路徑）
           exclude: [
